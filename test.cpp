@@ -8,31 +8,41 @@ using namespace std;
 int main()
 {
     string str;
-    cin >> str;
+    getline(cin, str);
+    if (str.length() == 0)
+    {
+        cout << 0 << endl;
+        return 0;
+    }
 
-    int arr[32] = {
-        0,
-    };
-    int max = -1;
-    char maxChar;
+    bool isEnter = false;
+
+    int n = str.find_last_not_of(' ');
+    str = n == string::npos ? str : str.substr(0, n + 1);
+    n = str.find_first_not_of(' ');
+    str = n == string::npos ? str : str.substr(n, str.length());
+
+    bool start = str.front() != ' ';
+
+    int c = 0;
     for (int i = 0; i < str.length(); i++)
     {
-        int seq = (int)str[i] - 65;
-        if (seq >= 32)
-            seq -= 32;
-
-        arr[seq]++;
-        if (max < arr[seq])
+        if (str.at(i) == ' ')
         {
-            maxChar = (char)(seq + 65);
-            max = arr[seq];
+            if (start)
+            {
+                c++;
+                isEnter = true;
+            }
         }
-        else if (max == arr[seq])
+        else
         {
-            maxChar = '?';
+            if (i == 0)
+                isEnter = true;
         }
     }
-    cout << maxChar << endl;
+
+    cout << (isEnter ? c + 1 : c) << endl;
 
     return 0;
 }
