@@ -10,31 +10,31 @@ int main()
     string word;
 
     cin >> word;
+    // abcdc=e
 
-    // 1 ABC 3
-    // 2 DEF 6
-    // 3 GHI 9
-    // 4 JKL 12
-    // 5 MNO 15
-    // 6 PQRS 18 19 20 21
+    int tot = word.length();
 
-    int sum = 0;
-    for (int i = 0; i < word.length(); i++)
+    string pattern[8] = {
+        "c=",
+        "c-",
+        "dz=",
+        "d-",
+        "lj",
+        "nj",
+        "s=",
+        "z="};
+
+    for (int i = 0; i < 8; i++)
     {
-        char c = word.at(i);
 
-        if (c >= 'S')
-            c--;
-
-        if (c >= 89)
-            c--;
-
-        c -= 62;
-        c /= 3;
-        sum += c + 2;
+        for (int j = 0; j <= (int)(word.length() - pattern[i].length()); j++)
+        {
+            if (word.substr(j, pattern[i].length()).compare(pattern[i]) == 0)
+                tot--;
+        }
     }
 
-    cout << sum << endl;
+    cout << tot << endl;
 
     return 0;
 }
