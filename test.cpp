@@ -7,20 +7,34 @@ using namespace std;
 
 int main()
 {
-    string a, b;
-    string c, d = "";
-    cin >> a >> b;
-    c.push_back(a[2]);
-    c.push_back(a[1]);
-    c.push_back(a[0]);
-    d.push_back(b[2]);
-    d.push_back(b[1]);
-    d.push_back(b[0]);
-    int i = stoi(c);
-    int j = stoi(d);
+    string word;
 
-    cout << (i < j ? j : i) << endl;
-    // int n1 = (int)
+    cin >> word;
+
+    // 1 ABC 3
+    // 2 DEF 6
+    // 3 GHI 9
+    // 4 JKL 12
+    // 5 MNO 15
+    // 6 PQRS 18 19 20 21
+
+    int sum = 0;
+    for (int i = 0; i < word.length(); i++)
+    {
+        char c = word.at(i);
+
+        if (c >= 'S')
+            c--;
+
+        if (c >= 89)
+            c--;
+
+        c -= 62;
+        c /= 3;
+        sum += c + 2;
+    }
+
+    cout << sum << endl;
 
     return 0;
 }
