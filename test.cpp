@@ -7,31 +7,33 @@ using namespace std;
 
 int main()
 {
-    string word;
-
-    cin >> word;
-    // abcdc=e
-
-    int tot = word.length();
-
-    string pattern[8] = {
-        "c=",
-        "c-",
-        "dz=",
-        "d-",
-        "lj",
-        "nj",
-        "s=",
-        "z="};
-
-    for (int i = 0; i < 8; i++)
+    int N;
+    cin >> N;
+    int tot = 0;
+    for (int i = 0; i < N; i++)
     {
-
-        for (int j = 0; j <= (int)(word.length() - pattern[i].length()); j++)
+        string word;
+        cin >> word;
+        bool isGroup = true;
+        char befChar = word.at(0);
+        bool arr[26] = {
+            false,
+        };
+        arr[befChar - 97] = true;
+        for (int j = 1; j < word.length(); j++)
         {
-            if (word.substr(j, pattern[i].length()).compare(pattern[i]) == 0)
-                tot--;
+            if (befChar != word[j])
+            {
+                if (arr[word[j] - 97])
+                {
+                    isGroup = false;
+                }
+                arr[befChar - 97] = true;
+            }
+            befChar = word.at(j);
         }
+        if (isGroup)
+            tot++;
     }
 
     cout << tot << endl;
