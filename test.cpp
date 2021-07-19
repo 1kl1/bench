@@ -7,42 +7,20 @@ using namespace std;
 
 int main()
 {
-    string str;
-    getline(cin, str);
-    if (str.length() == 0)
-    {
-        cout << 0 << endl;
-        return 0;
-    }
+    string a, b;
+    string c, d = "";
+    cin >> a >> b;
+    c.push_back(a[2]);
+    c.push_back(a[1]);
+    c.push_back(a[0]);
+    d.push_back(b[2]);
+    d.push_back(b[1]);
+    d.push_back(b[0]);
+    int i = stoi(c);
+    int j = stoi(d);
 
-    bool isEnter = false;
-
-    int n = str.find_last_not_of(' ');
-    str = n == string::npos ? str : str.substr(0, n + 1);
-    n = str.find_first_not_of(' ');
-    str = n == string::npos ? str : str.substr(n, str.length());
-
-    bool start = str.front() != ' ';
-
-    int c = 0;
-    for (int i = 0; i < str.length(); i++)
-    {
-        if (str.at(i) == ' ')
-        {
-            if (start)
-            {
-                c++;
-                isEnter = true;
-            }
-        }
-        else
-        {
-            if (i == 0)
-                isEnter = true;
-        }
-    }
-
-    cout << (isEnter ? c + 1 : c) << endl;
+    cout << (i < j ? j : i) << endl;
+    // int n1 = (int)
 
     return 0;
 }
