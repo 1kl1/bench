@@ -2,84 +2,43 @@
 #include <iostream>
 // #include <string>
 #include <vector>
-// #include <cmath>
+#include <cmath>
 
 using namespace std;
 
-vector<int> primeList;
-
-bool isPrime(int n)
+vector<int> che(int n)
 {
-    if (n % 2 == 0)
-        return false;
-    for (int i = 0; i < primeList.size(); i++)
+    vector<int> primeList;
+    bool arr[2 * n + 1];
+    for (int i = 0; i < 2 * n; i++)
+        arr[i] = false;
+    arr[0] = arr[1] = true;
+
+    for (int i = 2; i <= 2 * n; i++)
     {
-        if (n < primeList.at(i))
-            return false;
-        else if (n == primeList.at(i))
-            return true;
+        if (arr[i])
+            continue;
+        if (i > n)
+            primeList.push_back(i);
+        for (int j = i * 2; j <= 2 * n; j += i)
+            arr[j] = true;
     }
-    return false;
+
+    return primeList;
 }
 
 int main()
 {
-    int N;
-    cin >> N;
-
-    bool arr[10000];
-    for (int i = 0; i < 10000; i++)
-        arr[i] = false;
-
-    for (int i = 2; i < 10000; i++)
+    while (true)
     {
-        if (arr[i])
-            continue;
-        primeList.push_back(i);
-        if (i <= 100)
-            for (int j = i * 2; j < 10000; j += i)
-                arr[j] = true;
-    }
+        int N;
+        cin >> N;
+        if (N == 0)
+            break;
 
-    for (int idx = 0; idx < N; idx++)
-    {
-        int n;
-        cin >> n;
-        int end;
-        for (int i = 0;; i++)
-        {
-            if (primeList[i] > n)
-            {
-                end = i;
-                break;
-            }
-        }
-        int half = n >> 1;
-        bool flag = false;
-        for (int i = 0; i < end; i++)
-        {
-            if (half == primeList[i])
-            {
-                flag = true;
-                cout << half << " " << half << endl;
-                break;
-            }
-        }
-        if (flag)
-            continue;
-
-        int a = half - 1;
-        int b = half + 1;
-        while (a >= 2)
-        {
-            if (isPrime(a) && isPrime(b))
-            {
-                cout << a << " " << b << endl;
-                break;
-            }
-            a--;
-            b++;
-        }
+        vector<int> prime;
+        prime = che(N);
+        cout << prime.size() << endl;
     }
 
     return 0;
