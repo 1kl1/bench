@@ -1,53 +1,84 @@
 // #include <stdio.h>
 #include <iostream>
 // #include <string>
-// #include <vector>
-#include <cmath>
+#include <vector>
+// #include <cmath>
 
 using namespace std;
+
+vector<int> primeList;
+
+bool isPrime(int n)
+{
+    if (n % 2 == 0)
+        return false;
+    for (int i = 0; i < primeList.size(); i++)
+    {
+        if (n < primeList.at(i))
+            return false;
+        else if (n == primeList.at(i))
+            return true;
+    }
+    return false;
+}
 
 int main()
 {
     int N;
     cin >> N;
 
+    bool arr[10000];
+    for (int i = 0; i < 10000; i++)
+        arr[i] = false;
+
+    for (int i = 2; i < 10000; i++)
+    {
+        if (arr[i])
+            continue;
+        primeList.push_back(i);
+        if (i <= 100)
+            for (int j = i * 2; j < 10000; j += i)
+                arr[j] = true;
+    }
+
     for (int idx = 0; idx < N; idx++)
     {
-        int x, y;
-        cin >> x >> y;
-        int dist = y - x;
-        if (dist <= 4)
+        int n;
+        cin >> n;
+        int end;
+        for (int i = 0;; i++)
         {
-            switch (dist)
+            if (primeList[i] > n)
             {
-            case 1:
-                cout << 1 << endl;
-                break;
-            case 2:
-                cout << 2 << endl;
-                break;
-            case 3:
-                cout << 3 << endl;
-                break;
-            case 4:
-                cout << 3 << endl;
+                end = i;
                 break;
             }
+        }
+        int half = n >> 1;
+        bool flag = false;
+        for (int i = 0; i < end; i++)
+        {
+            if (half == primeList[i])
+            {
+                flag = true;
+                cout << half << " " << half << endl;
+                break;
+            }
+        }
+        if (flag)
             continue;
-        }
-        int n = (int)sqrt(dist);
-        // cout << n << endl;
-        if (n * n == dist)
+
+        int a = half - 1;
+        int b = half + 1;
+        while (a >= 2)
         {
-            cout << n * 2 - 1 << endl;
-        }
-        else if (n * n + n < dist)
-        {
-            cout << n + n + 1 << endl;
-        }
-        else
-        {
-            cout << n + n << endl;
+            if (isPrime(a) && isPrime(b))
+            {
+                cout << a << " " << b << endl;
+                break;
+            }
+            a--;
+            b++;
         }
     }
 
@@ -57,3 +88,4 @@ int main()
 //cin >> var
 //cin.ignore(32767, '\n');
 // 65-A, 97-a
+// double sqrt()
