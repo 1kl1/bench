@@ -1,4 +1,4 @@
-// #include <stdio.h>
+#include <stdio.h>
 #include <iostream>
 // #include <string>
 #include <vector>
@@ -6,40 +6,35 @@
 
 using namespace std;
 
-vector<int> che(int n)
+void che(int m, int n)
 {
-    vector<int> primeList;
-    bool arr[2 * n + 1];
-    for (int i = 0; i < 2 * n; i++)
+    bool arr[n + 1];
+    for (int i = 0; i <= n; i++)
         arr[i] = false;
-    arr[0] = arr[1] = true;
 
-    for (int i = 2; i <= 2 * n; i++)
+    arr[0] = arr[1] = true;
+    int sqr = sqrt(n);
+    for (int i = 2; i <= sqr; i++)
     {
         if (arr[i])
             continue;
-        if (i > n)
-            primeList.push_back(i);
-        for (int j = i * 2; j <= 2 * n; j += i)
+        for (int j = i * 2; j <= n; j += i)
             arr[j] = true;
     }
-
-    return primeList;
+    for (int i = m; i <= n; i++)
+    {
+        if (arr[i] == false)
+            printf("%d\n", i);
+    }
 }
 
 int main()
 {
-    while (true)
-    {
-        int N;
-        cin >> N;
-        if (N == 0)
-            break;
 
-        vector<int> prime;
-        prime = che(N);
-        cout << prime.size() << endl;
-    }
+    int M, N;
+    cin >> M >> N;
+
+    che(M, N);
 
     return 0;
 }
