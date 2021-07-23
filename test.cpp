@@ -8,13 +8,17 @@ using namespace std;
 
 int main()
 {
-    int h, a, b;
-    cin >> a >> b >> h;
+    int T;
+    cin >> T;
+    for (int i = 0; i < T; i++)
+    {
+        int H, W, N;
+        cin >> H >> W >> N;
 
-    int days = 1;
-    days += ceil((double)(h - a) / (double)(a - b));
-
-    cout << days << endl;
+        int ho = ceil(N / (H * 1.0));
+        int lvl = N % H == 0 ? H : N % H;
+        printf("%d%02d\n", lvl, ho);
+    }
 
     return 0;
 }
