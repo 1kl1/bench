@@ -2,30 +2,19 @@
 #include <iostream>
 // #include <string>
 // #include <vector>
-// #include <cmath>
+#include <cmath>
 
 using namespace std;
 
 int main()
 {
-    int x;
-    cin >> x;
-    int n = 0;
-    int c = 1;
-    while (n + c < x)
-    {
-        n += c;
-        c++;
-    }
-    int k = x - n;
-    if (c % 2 == 0)
-    {
-        cout << k << "/" << 1 + (c - k) << endl;
-    }
-    else
-    {
-        cout << 1 + (c - k) << "/" << k << endl;
-    }
+    int h, a, b;
+    cin >> a >> b >> h;
+
+    int days = 1;
+    days += ceil((double)(h - a) / (double)(a - b));
+
+    cout << days << endl;
 
     return 0;
 }
