@@ -8,17 +8,24 @@ using namespace std;
 
 int main()
 {
-
-    int n;
-    cin >> n;
+    int x;
+    cin >> x;
+    int n = 0;
     int c = 1;
-    n -= c;
-    while (n > 0)
+    while (n + c < x)
     {
-        n -= c * 6;
+        n += c;
         c++;
     }
-    cout << c << endl;
+    int k = x - n;
+    if (c % 2 == 0)
+    {
+        cout << k << "/" << 1 + (c - k) << endl;
+    }
+    else
+    {
+        cout << 1 + (c - k) << "/" << k << endl;
+    }
 
     return 0;
 }
