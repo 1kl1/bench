@@ -6,37 +6,21 @@
 
 using namespace std;
 
-bool isPrime(int k)
-{
-    int count = 0;
-    for (int i = 1; i <= k; i++)
-    {
-        if (k % i == 0)
-            count++;
-    }
-    if (count == 2)
-        return true;
-    else
-        return false;
-}
-
 int main()
 {
-    int N;
+    int x, y, w, h;
 
-    cin >> N;
+    cin >> x >> y >> w >> h;
 
-    if (N == 1)
-        return 0;
+    int l, t, r, b;
+    l = x;
+    r = w - x;
+    t = h - y;
+    b = y;
 
-    for (int i = 2; i <= N; i++)
-    {
-        while (N % i == 0 && isPrime(i))
-        {
-            cout << i << endl;
-            N /= i;
-        }
-    }
+    int m = min(min(l, r), min(t, b));
+    cout << m << endl;
+
     return 0;
 }
 
