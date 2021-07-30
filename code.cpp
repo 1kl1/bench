@@ -2,55 +2,19 @@
 #include <iostream>
 // #include <string>
 // #include <vector>
-// #include <cmath>
+#include <cmath>
+#include <iomanip>
 
 using namespace std;
 
 int main()
 {
-    int a, b, c;
+    double r;
+    double pi = M_PI;
 
-    while (true)
-    {
-        cin >> a >> b >> c;
-        if (a == 0)
-            break;
-
-        int max_ = max(c, max(a, b));
-        if (max_ == a)
-        {
-            if (a * a == b * b + c * c)
-            {
-                cout << "right" << endl;
-            }
-            else
-            {
-                cout << "wrong" << endl;
-            }
-        }
-        else if (max_ == b)
-        {
-            if (b * b == a * a + c * c)
-            {
-                cout << "right" << endl;
-            }
-            else
-            {
-                cout << "wrong" << endl;
-            }
-        }
-        else
-        {
-            if (c * c == b * b + a * a)
-            {
-                cout << "right" << endl;
-            }
-            else
-            {
-                cout << "wrong" << endl;
-            }
-        }
-    }
+    cin >> r;
+    cout << setprecision(16) << r * r * pi << endl;
+    cout << r * r * 2 << endl;
 
     return 0;
 }
