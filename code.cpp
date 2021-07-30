@@ -8,18 +8,25 @@ using namespace std;
 
 int main()
 {
-    int x, y, w, h;
+    int x1, y1, x2, y2, x3, y3, x4, y4;
 
-    cin >> x >> y >> w >> h;
+    cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
 
-    int l, t, r, b;
-    l = x;
-    r = w - x;
-    t = h - y;
-    b = y;
+    int height;
+    if (x1 != x2 && y1 != y2)
+    {
+        cout << x1 + x2 - x3 << " " << y1 + y2 - y3 << endl;
+    }
 
-    int m = min(min(l, r), min(t, b));
-    cout << m << endl;
+    else if (x1 != x3 && y1 != y3)
+    {
+        cout << x1 + x3 - x2 << " " << y1 + y3 - y2 << endl;
+    }
+
+    else if (x2 != x3 && y2 != y3)
+    {
+        cout << x2 + x3 - x1 << " " << y2 + y3 - y1 << endl;
+    }
 
     return 0;
 }
