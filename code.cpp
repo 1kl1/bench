@@ -22,18 +22,27 @@ bool isPrime(int k)
 
 int main()
 {
-    int N;
+    int M, N;
     int c = 0;
+    int min = 9999999;
 
-    cin >> N;
-    for (int i = 0; i < N; i++)
+    cin >> M >> N;
+    for (int i = M; i <= N; i++)
     {
-        int k;
-        cin >> k;
-        if (isPrime(k))
-            c++;
+        if (isPrime(i))
+        {
+            c += i;
+            if (min > i)
+                min = i;
+        }
     }
-    cout << c << endl;
+    if (c == 0)
+    {
+        cout << -1 << endl;
+        return 0;
+    }
+    cout << c << endl
+         << min << endl;
     return 0;
 }
 
