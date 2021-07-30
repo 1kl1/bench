@@ -8,24 +8,48 @@ using namespace std;
 
 int main()
 {
-    int x1, y1, x2, y2, x3, y3, x4, y4;
+    int a, b, c;
 
-    cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-
-    int height;
-    if (x1 != x2 && y1 != y2)
+    while (true)
     {
-        cout << x1 + x2 - x3 << " " << y1 + y2 - y3 << endl;
-    }
+        cin >> a >> b >> c;
+        if (a == 0)
+            break;
 
-    else if (x1 != x3 && y1 != y3)
-    {
-        cout << x1 + x3 - x2 << " " << y1 + y3 - y2 << endl;
-    }
-
-    else if (x2 != x3 && y2 != y3)
-    {
-        cout << x2 + x3 - x1 << " " << y2 + y3 - y1 << endl;
+        int max_ = max(c, max(a, b));
+        if (max_ == a)
+        {
+            if (a * a == b * b + c * c)
+            {
+                cout << "right" << endl;
+            }
+            else
+            {
+                cout << "wrong" << endl;
+            }
+        }
+        else if (max_ == b)
+        {
+            if (b * b == a * a + c * c)
+            {
+                cout << "right" << endl;
+            }
+            else
+            {
+                cout << "wrong" << endl;
+            }
+        }
+        else
+        {
+            if (c * c == b * b + a * a)
+            {
+                cout << "right" << endl;
+            }
+            else
+            {
+                cout << "wrong" << endl;
+            }
+        }
     }
 
     return 0;
