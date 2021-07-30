@@ -1,0 +1,58 @@
+// #include <stdio.h>
+// #include <iostream>
+// #include <string>
+// #include <vector>
+// #include <cmath>
+
+// using namespace std;
+
+// int N;
+// int pattern[8][2] = {{1, 0}, {0, 1}, {1, 1}, {-1, 0}, {0, -1}, {-1, -1}, {-1, 1}, {1, -1}};
+
+// int sum(vector<int> line)
+// {
+//     int res = 0;
+//     for (int i = 0; i < line.size(); i++)
+//         res += line.at(i);
+
+//     return res;
+// }
+
+// vector<vector<int> > mark(int y, int x, vector<vector<int> > m)
+// {
+// }
+
+// int NQueen(int idx, vector<vector<int> > map)
+// {
+//     if (idx >= N)
+//         return 0;
+//     if (sum(map[idx]) == 0)
+//         return 0;
+
+//     int num = 0;
+//     for (int i = 0; i < N; i++)
+//     {
+//         if (map[idx][i])
+//         {
+//             vector<vector<int> > newMap = mark(idx, i, map);
+//             num += NQueen(idx + 1, newMap);
+//         }
+//     }
+//     return num;
+// }
+
+// int main()
+// {
+
+//     cin >> N;
+//     for (int i = 0; i < N; i++)
+//     {
+//         for (int j = 0; j < N; j++)
+//         {
+//         }
+//     }
+//     return 0;
+// }
+
+// //cin.ignore(32767, '\n');
+// // 65-A, 97-a
