@@ -6,58 +6,42 @@
 
 using namespace std;
 
-char _swap(char flag)
+bool isEnd(int i)
 {
-    if (flag == 'W')
-        flag = 'B';
-    else
-        flag = 'W';
-    return flag;
+    bool _end[3] = {false, false, false};
+    int cnt = 0;
+    int max_cnt = -1;
+    while (i > 0)
+    {
+        if (i % 10 == 6)
+        {
+            cnt++;
+            if (max_cnt < cnt)
+                max_cnt = cnt;
+        }
+        else
+        {
+            cnt = 0;
+        }
+        i /= 10;
+    }
+    if (max_cnt >= 3)
+        return true;
+    return false;
 }
 
 int main()
 {
-    int N, M;
-    cin >> N >> M;
-    vector<string> map;
-
-    for (int i = 0; i < N; i++)
+    int n;
+    cin >> n;
+    int i = 0;
+    while (n >= 1)
     {
-        string input;
-        cin >> input;
-        map.push_back(input);
+        i++;
+        if (isEnd(i))
+            n--;
     }
-    int _min = 999999;
-
-    for (int y = 7; y < N; y++)
-    {
-        for (int x = 7; x < M; x++)
-        {
-            char flag = 'B';
-            int cnt = 0;
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (map[y - 7 + i][x - 7 + j] != flag)
-                    {
-                        cnt++;
-                    }
-                    flag = _swap(flag);
-                }
-                flag = _swap(flag);
-            }
-            if (_min > cnt)
-                _min = cnt;
-            if (_min > 64 - cnt)
-                _min = 64 - cnt;
-        }
-    }
-
-    if (_min == 999999)
-        _min = 0;
-    cout << _min << endl;
-
+    cout << i << endl;
     return 0;
 }
 
