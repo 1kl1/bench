@@ -7,15 +7,18 @@
 
 using namespace std;
 
+int fac(int n)
+{
+    if (n <= 1)
+        return 1;
+    return fac(n - 1) * n;
+}
+
 int main()
 {
-    double r;
-    double pi = M_PI;
-
-    cin >> r;
-    cout << setprecision(16) << r * r * pi << endl;
-    cout << r * r * 2 << endl;
-
+    int N;
+    cin >> N;
+    cout << fac(N) << endl;
     return 0;
 }
 
