@@ -8,37 +8,26 @@ using namespace std;
 
 int main()
 {
-    int N, M;
-    cin >> N >> M;
-    int nums[100];
+    int N;
 
-    for (int i = 0; i < N; i++)
+    cin >> N;
+    for (int i = 1; i < N; i++)
     {
-        scanf("%d", &nums[i]);
-    }
-
-    int est = 999999;
-    int clst = -1;
-
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = i + 1; j < N; j++)
+        int sum = 0;
+        int tmp = i;
+        while (tmp > 0)
         {
-            if (nums[i] + nums[j] <= M)
-            {
-                for (int k = j + 1; k < N; k++)
-                {
-                    int sum = nums[i] + nums[j] + nums[k];
-                    if (sum <= M && M - sum < est)
-                    {
-                        clst = sum;
-                        est = M - sum;
-                    }
-                }
-            }
+            sum += tmp % 10;
+            tmp /= 10;
+        }
+        if (N == sum + i)
+        {
+            cout << i << endl;
+            return 0;
         }
     }
-    cout << clst << endl;
+    cout << 0 << endl;
+    return 0;
 }
 
 //cin.ignore(32767, '\n');
