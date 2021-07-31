@@ -1,38 +1,40 @@
 #include <stdio.h>
 #include <iostream>
+#include <vector>
 // #include <string>
-// #include <vector>
 // #include <cmath>
 
 using namespace std;
 
-int N;
-char map[2188][2188];
+#define first 1
+#define second 2
+#define third 3
 
-void star(int n, int x, int y, bool flag)
+int N;
+int cnt = 0;
+vector<int> mov[2];
+
+void hanoi(int n, int from, int to)
 {
     if (n == 1)
     {
-        if (flag)
-            map[x][y] = '*';
-        else
-            map[x][y] = ' ';
+        mov[0].push_back(from);
+        mov[1].push_back(to);
+        cnt++;
     }
     else
     {
-        x *= 3;
-        y *= 3;
-        star(n / 3, x, y, flag && true);
-        star(n / 3, x + 1, y, flag && true);
-        star(n / 3, x + 2, y, flag && true);
-
-        star(n / 3, x, y + 1, flag && true);
-        star(n / 3, x + 1, y + 1, false);
-        star(n / 3, x + 2, y + 1, flag && true);
-
-        star(n / 3, x, y + 2, flag && true);
-        star(n / 3, x + 1, y + 2, flag && true);
-        star(n / 3, x + 2, y + 2, flag && true);
+        int other;
+        for (int i = 1; i <= 3; i++)
+        {
+            if (from != i && to != i)
+                other = i;
+        }
+        hanoi(n - 1, from, other);
+        mov[0].push_back(from);
+        mov[1].push_back(to);
+        cnt++;
+        hanoi(n - 1, other, to);
     }
     return;
 }
@@ -40,16 +42,15 @@ void star(int n, int x, int y, bool flag)
 int main()
 {
     cin >> N;
-    star(N, 0, 0, true);
 
-    for (int i = 0; i < N; i++)
+    hanoi(N, first, third);
+    printf("%d\n", cnt);
+
+    for (int i = 0; i < mov[0].size(); i++)
     {
-        for (int j = 0; j < N; j++)
-        {
-            printf("%c", map[i][j]);
-        }
-        cout << endl;
+        printf("%d %d\n", mov[0][i], mov[1][i]);
     }
+
     return 0;
 }
 
