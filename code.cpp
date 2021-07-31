@@ -11,22 +11,30 @@ int main()
     int N;
 
     cin >> N;
-    for (int i = 1; i < N; i++)
+
+    vector<int> weight;
+    vector<int> height;
+    for (int i = 0; i < N; i++)
     {
-        int sum = 0;
-        int tmp = i;
-        while (tmp > 0)
-        {
-            sum += tmp % 10;
-            tmp /= 10;
-        }
-        if (N == sum + i)
-        {
-            cout << i << endl;
-            return 0;
-        }
+        int w, h;
+        cin >> w >> h;
+        weight.push_back(w);
+        height.push_back(h);
     }
-    cout << 0 << endl;
+
+    for (int i = 0; i < N; i++)
+    {
+        int cnt = 1;
+        for (int j = 0; j < N; j++)
+        {
+            if (weight[i] < weight[j] && height[i] < height[j])
+                cnt++;
+        }
+        cout << cnt;
+        if (i != N - 1)
+            cout << " ";
+    }
+    cout << endl;
     return 0;
 }
 
