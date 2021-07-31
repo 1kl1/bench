@@ -3,24 +3,26 @@
 // #include <string>
 // #include <vector>
 #include <cmath>
-#include <iomanip>
 
 using namespace std;
 
-int fac(int n)
+int fibo(int n)
 {
-    if (n <= 1)
+    if (n == 1)
         return 1;
-    return fac(n - 1) * n;
+    else if (n == 0)
+        return 0;
+    return fibo(n - 1) + fibo(n - 2);
 }
 
 int main()
 {
     int N;
     cin >> N;
-    cout << fac(N) << endl;
+    cout << fibo(N) << endl;
     return 0;
 }
 
 //cin.ignore(32767, '\n');
 // 65-A, 97-a
+// #include <iomanip>
