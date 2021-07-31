@@ -1,59 +1,177 @@
 #include <stdio.h>
 #include <iostream>
+#include <string>
 #include <vector>
-// #include <string>
-// #include <cmath>
+#include <cmath>
 
 using namespace std;
 
-#define first 1
-#define second 2
-#define third 3
-
 int N;
-int cnt = 0;
-vector<int> mov[2];
-
-void hanoi(int n, int from, int to)
+int pattern[3][2] = {{1, 0}, {1, 1}, {1, -1}};
+int sum(int line[15])
 {
-    if (n == 1)
+    int res = 0;
+    for (int i = 0; i < N; i++)
+        res += line[i];
+    return res;
+}
+
+// vector<vector<int> > mark(int y, int x, vector<vector<int> > map)
+// {
+
+//     for (int i = 0; i < 3; i++)
+//     {
+//         int cursor[2] = {y, x};
+//         map[cursor[0]][cursor[1]] = 8;
+//         cursor[0] += pattern[i][0];
+//         cursor[1] += pattern[i][1];
+//         while (cursor[1] >= 0 && cursor[1] < N && cursor[0] < N)
+//         {
+//             map[cursor[0]][cursor[1]] = 0;
+//             cursor[0] += pattern[i][0];
+//             cursor[1] += pattern[i][1];
+//         }
+//     }
+//     return map;
+// }
+
+int NQueen(int idx, int map[15][15])
+{
+    if (idx == N - 1)
+        return sum(map[idx]);
+
+    if (sum(map[idx]) == 0)
+        return 0;
+
+    int num = 0;
+
+    int tmp = N;
+    if (idx == 0)
     {
-        mov[0].push_back(from);
-        mov[1].push_back(to);
-        cnt++;
+        tmp /= 2;
     }
-    else
+    for (int i = 0; i < tmp; i++)
     {
-        int other;
-        for (int i = 1; i <= 3; i++)
+        if (map[idx][i] == 1)
         {
-            if (from != i && to != i)
-                other = i;
+            int map_cpy[15][15];
+            copy(&map[0][0], &map[0][0] + 225, &map_cpy[0][0]);
+
+            for (int k = 0; k < 3; k++)
+            {
+                int cursor[2] = {idx, i};
+                map_cpy[cursor[0]][cursor[1]] = 8;
+                cursor[0] += pattern[k][0];
+                cursor[1] += pattern[k][1];
+                while (cursor[1] >= 0 && cursor[1] < N && cursor[0] < N)
+                {
+                    map_cpy[cursor[0]][cursor[1]] = 0;
+                    cursor[0] += pattern[k][0];
+                    cursor[1] += pattern[k][1];
+                }
+            }
+
+            // for (int m = 0; m < N; m++)
+            // {
+            //     for (int n = 0; n < N; n++)
+            //     {
+            //         printf("%d ", map_cpy[m][n]);
+            //     }
+            //     printf("\n");
+            // }
+            // cout << endl;
+
+            num += NQueen(idx + 1, map_cpy);
         }
-        hanoi(n - 1, from, other);
-        mov[0].push_back(from);
-        mov[1].push_back(to);
-        cnt++;
-        hanoi(n - 1, other, to);
     }
-    return;
+    if (idx == 0)
+    {
+        num *= 2;
+
+        if (N % 2 == 1)
+        {
+            if (map[idx][tmp] == 1)
+            {
+                int map_cpy[15][15];
+                copy(&map[0][0], &map[0][0] + 225, &map_cpy[0][0]);
+
+                for (int k = 0; k < 3; k++)
+                {
+                    int cursor[2] = {idx, tmp};
+                    map_cpy[cursor[0]][cursor[1]] = 8;
+                    cursor[0] += pattern[k][0];
+                    cursor[1] += pattern[k][1];
+                    while (cursor[1] >= 0 && cursor[1] < N && cursor[0] < N)
+                    {
+                        map_cpy[cursor[0]][cursor[1]] = 0;
+                        cursor[0] += pattern[k][0];
+                        cursor[1] += pattern[k][1];
+                    }
+                }
+
+                // for (int m = 0; m < N; m++)
+                // {
+                //     for (int n = 0; n < N; n++)
+                //     {
+                //         printf("%d ", map_cpy[m][n]);
+                //     }
+                //     printf("\n");
+                // }
+                // cout << endl;
+
+                num += NQueen(idx + 1, map_cpy);
+            }
+        }
+    }
+    return num;
 }
 
 int main()
 {
     cin >> N;
+    int map[15][15] = {
+        0,
+    };
+    for (int i = 0; i < N; i++)
+        for (int j = 0; j < N; j++)
+            map[i][j] = 1;
 
-    hanoi(N, first, third);
-    printf("%d\n", cnt);
-
-    for (int i = 0; i < mov[0].size(); i++)
-    {
-        printf("%d %d\n", mov[0][i], mov[1][i]);
-    }
-
+    cout << NQueen(0, map) << endl;
     return 0;
 }
 
 //cin.ignore(32767, '\n');
 // 65-A, 97-a
 // #include <iomanip>
+
+// if (idx == 0)
+//     {
+//         if (N % 2 == 0)
+//         {
+//             for (int i = 0; i < N / 2; i++)
+//             {
+//                 if (map[idx][i] == 1)
+//                 {
+//                     num += NQueen(idx + 1, mark(idx, i, map));
+//                 }
+//             }
+//             num *= 2;
+//         }
+//         else
+//         {
+//             cout << N / 2 << endl;
+//             for (int i = 0; i < N / 2; i++)
+//             {
+//                 if (map[idx][i] == 1)
+//                 {
+//                     num += NQueen(idx + 1, mark(idx, i, map));
+//                 }
+//             }
+
+//             num *= 2;
+//             if (map[idx][N / 2] == 1)
+//             {
+//                 num += NQueen(idx + 1, mark(idx, N / 2, map));
+//             }
+//         }
+//     }
